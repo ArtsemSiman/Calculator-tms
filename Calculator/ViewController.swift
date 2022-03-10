@@ -8,6 +8,11 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    var tipedNumber: Double = 0
+    var firstNumber: Double = 0
+    var operation: Int = 0
+    var action: Bool = false
    
 
 
@@ -16,19 +21,49 @@ class ViewController: UIViewController {
     @IBOutlet var buttons: [UIButton]!
     
     @IBAction func numbers(_ sender: UIButton) {
-        display.text = display.text! + String(sender.tag)
+        if action == true {
+            display.text = String(sender.tag)
+            action = false
+        } else {
+            display.text = display.text! + String(sender.tag)
+            
+        }
         
+        tipedNumber = Double(display.text!)!
     }
+    
     
     @IBAction func actions(_ sender: UIButton) {
-        if sender.tag == 10 {
+        if display.text != nil {
+
+            firstNumber = Double(display.text!)!
+        
+        if operation == 10 {
             display.text = ""
         }
-       
+            if operation == 17 {
+                operation = sender.tag
+                action = true    }
+        else if operation == 11 {
+            display.text = String( firstNumber / tipedNumber)
+        }
+        else if operation == 12 {
+            display.text = String( firstNumber * tipedNumber)
+        }
+        else if operation == 13 {
+            display.text = String( firstNumber - tipedNumber)
+        }
+        else if operation == 14 {
+            display.text = String( firstNumber + tipedNumber)
+        }
+        else if operation == 15 {
+            display.text = String(tipedNumber / 100)
+        }
+        
+ 
     }
-    
-    
-    
+    }
+   
     
     
     override func viewDidLoad() {
